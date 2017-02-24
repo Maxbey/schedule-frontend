@@ -1,0 +1,9 @@
+/vendor
+/node_modules
+.env
+/bower_components
+npm-debug.log
+.idea/
+public/views
+public/css
+public/js

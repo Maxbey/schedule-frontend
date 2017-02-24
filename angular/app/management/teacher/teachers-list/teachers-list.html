@@ -1,0 +1,34 @@
+<md-content flex layout="column" class="Page-Container" ng-controller="TeachersListController as vm">
+  <div layout="row">
+      <h1 layout-padding class="md-title">Администрирование преподавателей</h1>
+    <span flex="50"></span>
+    <md-input-container flex="15">
+        <label>Поиск преподавателей</label>
+       <input ng-model="vm.search">
+    </md-input-container>
+  </div>
+
+  <md-toolbar class="md-theme-light">
+    <div class="md-toolbar-tools">
+      <h2 class="md-toolbar-tools">
+        <span>Преподаватели</span>
+      </h2>
+      <span flex></span>
+      <md-button ng-href="management/teachers/create" class="md-raised">Добавить</md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout="column">
+    <md-list>
+      <md-list-item class="secondary-button-padding" ng-repeat="teacher in vm.teachers | filter:vm.search" ng-click="null">
+        <div class="md-list-item-text">
+          <h3 class="md-subhead">{{teacher.name}}</h3>
+          <h4 class="md-subhead">{{teacher.military_rank}}</h4>
+          <p class="md-caption">{{teacher.work_hours_limit}} часов</p>
+        </div>
+        <md-button class="md-secondary md-primary" ng-click="vm.edit(teacher)">Редактировать</md-button>
+
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-content>
