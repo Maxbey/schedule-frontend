@@ -14,15 +14,6 @@
         {text: 'Аудитории', state: 'management.audiences-list'}
       ];
 
-      vm.settingsMenuItems = [
-        {text: 'Пользователи', state: 'management.users-list'}
-      ];
-
-      vm.dashboardsMenuItems = [
-        {text: 'Панель администратора', state: 'management.dashboard'},
-        {text: 'Панель пользователя', state: 'user.user-dash'}
-      ];
-
       vm.go = function(item){
         $state.go(item.state);
       };

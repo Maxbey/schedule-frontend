@@ -16,7 +16,7 @@
             $auth.login(credentials).then(function (response) {
                 console.log(response);
                 $auth.setToken(response.data.key);
-                $state.go('management.dashboard');
+                $state.go('management.specialties-list');
             }, function () {
                 ToastService.show('Неправильный e-mail или пароль!');
             });

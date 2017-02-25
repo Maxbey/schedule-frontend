@@ -6,8 +6,8 @@
     function AudienceEditController($stateParams, $state, $scope, AudienceService){
         var vm = this;
 
-        AudienceService.get($stateParams.id).then(function(audience){
-          vm.audience = audience;
+        AudienceService.get($stateParams.id).then(function(response){
+          vm.audience = response.data;
         });
     }
 

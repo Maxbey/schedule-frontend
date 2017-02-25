@@ -14,7 +14,7 @@
         <span>Аудитории</span>
       </h2>
       <span flex></span>
-      <md-button ng-href="management/audiences/create" class="md-raised">Добавить</md-button>
+      <md-button ui-sref="management.audience-create" class="md-raised">Добавить</md-button>
     </div>
   </md-toolbar>
   <md-content layout="column">
@@ -22,7 +22,7 @@
       <md-list-item class="secondary-button-padding" ng-click="null" ng-repeat="audience in vm.audiences | filter:vm.search">
         <div class="md-list-item-text">
           <h3 class="md-subhead">{{audience.location}}</h3>
-          <h4 class="md-subhead">{{audience.purpose}}</h4>
+          <h4 class="md-subhead">{{audience.description}}</h4>
         </div>
         <md-button class="md-secondary md-primary" ng-click="vm.edit(audience)">Редактировать</md-button>
 

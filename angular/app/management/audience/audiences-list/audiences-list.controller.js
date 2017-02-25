@@ -6,8 +6,8 @@
     function AudiencesListController($state, AudienceService, DialogService){
         var vm = this;
 
-        AudienceService.all().then(function(audiences){
-          if(!audiences.length){
+        AudienceService.all().then(function(response){
+          if(!response.data.length){
             DialogService.action(
               'В системе не зарегистрированно ни одной аудитории. Создать новую ?',
                'Перейти к созданию'
@@ -16,7 +16,7 @@
              });
           }
           else{
-            vm.audiences = audiences;
+            vm.audiences = response.data;
           }
         });
 

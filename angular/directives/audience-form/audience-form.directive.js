@@ -23,7 +23,7 @@
         vm.update = function(){
           vm.buttonLocked = true;
           delete vm.audience.themes;
-          vm.audience.save().then(function(){
+          AudienceService.update(vm.audience).then(function(){
             ToastService.show('Аудитория обновлена');
             $state.go('management.audiences-list');
           }, function(){
@@ -34,7 +34,7 @@
         vm.delete = function(){
           DialogService.delete('Вы действительно хотите удалить аудиторию ?').then(function(){
             vm.buttonLocked = true;
-            vm.audience.remove().then(function(){
+            AudienceService.delete(vm.audience).then(function(){
               ToastService.show('Аудитория удалена');
               $state.go('management.audiences-list');
             });

@@ -10,11 +10,11 @@
     </div>
   </md-input-container>
   <md-input-container class="md-block" flex-gt-sm>
-    <label>Предназначение аудитории</label>
-    <input required name="audiencePurpose" ng-model="vm.audience.purpose">
+    <label>Описание аудитории</label>
+    <input required name="audiencePurpose" ng-model="vm.audience.description">
     <div ng-messages="audienceForm.audiencePurpose.$error" role="alert">
       <div ng-message="required">
-        Введите предназначение аудитории
+        Введите описание аудитории
       </div>
     </div>
   </md-input-container>
@@ -23,6 +23,6 @@
   </div>
   <div ng-if="audience">
     <md-button ng-disabled="vm.buttonLocked || audienceForm.$invalid" class="md-raised" ng-click="vm.update()">Обновить аудиторию</md-button>
-    <md-button ng-disabled="vm.buttonLocked || audienceForm.$invalid" class="md-raised md-warn" ng-click="vm.delete()">Удалить аудиторию</md-button>
+    <md-button ng-disabled="vm.buttonLocked" class="md-raised md-warn" ng-click="vm.delete()">Удалить аудиторию</md-button>
   </div>
 </form>
