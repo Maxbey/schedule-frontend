@@ -10,8 +10,8 @@
           $state.go('management.themes-list', {id: $stateParams.id});
         };
 
-        DisciplineService.get($stateParams.id).then(function(discipline){
-          vm.discipline = discipline;
+        DisciplineService.get($stateParams.id).then(function(response){
+          vm.discipline = response.data;
         });
     }
 

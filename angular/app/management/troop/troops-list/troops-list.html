@@ -22,7 +22,7 @@
       <md-list-item class="secondary-button-padding" ng-repeat="troop in vm.troops | filter:vm.search" ng-click="null">
         <div class="md-list-item-text">
           <h3 class="md-subhead">{{troop.code}}</h3>
-          <h4 class="md-subhead">{{troop.specialty}}</h4>
+          <h4 class="md-subhead">{{troop.specialty_code}}</h4>
           <p class="md-caption">{{ troop.term }} семестр, {{ troop.day | DayOfWeek}}</p>
         </div>
         <md-button class="md-secondary md-primary" ng-click="vm.edit(troop)">Редактировать</md-button>

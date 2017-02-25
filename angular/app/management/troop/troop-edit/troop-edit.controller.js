@@ -3,11 +3,11 @@
 
     angular.module('app.controllers').controller('TroopEditController', TroopEditController);
 
-    function TroopEditController($stateParams, $state, $scope, TroopService){
+    function TroopEditController($stateParams, TroopService){
         var vm = this;
 
-        TroopService.get($stateParams.id).then(function(troop){
-          vm.troop = troop;
+        TroopService.get($stateParams.id).then(function(response){
+          vm.troop = response.data;
         });
     }
 

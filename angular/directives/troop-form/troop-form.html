@@ -11,7 +11,7 @@
   </md-input-container>
   <md-input-container class="md-block" flex-gt-sm>
     <label>Специальность</label>
-    <md-select name="troopSpecialty" required ng-model="vm.troop.specialty_id">
+    <md-select name="troopSpecialty" ng-model="vm.troop.specialty">
             <md-option ng-repeat="specialty in vm.specialties" value="{{specialty.id}}">
               {{specialty.code}}
             </md-option>
@@ -24,7 +24,7 @@
   </md-input-container>
   <md-input-container class="md-block" flex-gt-sm>
     <label>День прихода</label>
-    <md-select name="troopDay" required ng-model="vm.troop.day">
+    <md-select name="troopDay" ng-model="vm.troop.day">
             <md-option ng-repeat="day in [0, 1, 2, 3, 4]" value="{{ day }}">
               {{ day | DayOfWeek }}
             </md-option>
@@ -37,7 +37,7 @@
   </md-input-container>
   <md-input-container class="md-block" flex-gt-sm>
     <label>Текущий семестр обучения</label>
-    <md-select required name="troopTerm" ng-model="vm.troop.term">
+    <md-select name="troopTerm" ng-model="vm.troop.term">
             <md-option ng-repeat="term in [1, 2, 3, 4, 5, 6, 7]" ng-value="term">
               {{ term }}
             </md-option>
@@ -53,6 +53,6 @@
   </div>
   <div ng-if="troop">
     <md-button ng-disabled="vm.buttonLocked || troopForm.$invalid" class="md-raised" ng-click="vm.update()">Обновить взвод</md-button>
-    <md-button ng-disabled="vm.buttonLocked || troopForm.$invalid" class="md-raised md-warn" ng-click="vm.delete()">Удалить взвод</md-button>
+    <md-button ng-disabled="vm.buttonLocked" class="md-raised md-warn" ng-click="vm.delete()">Удалить взвод</md-button>
   </div>
 </form>

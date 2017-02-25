@@ -35,7 +35,7 @@
   </div>
   <div ng-if="specialty">
     <md-button ng-disabled="vm.buttonLocked || specialtyForm.$invalid" class="md-raised" ng-click="vm.update()">Обновить специальность</md-button>
-    <md-button ng-disabled="vm.buttonLocked || specialtyForm.$invalid" class="md-raised md-warn" ng-click="vm.delete()">Удалить специальность</md-button>
+    <md-button ng-disabled="vm.buttonLocked" class="md-raised md-warn" ng-click="vm.delete()">Удалить специальность</md-button>
   </div>
 
   </form>

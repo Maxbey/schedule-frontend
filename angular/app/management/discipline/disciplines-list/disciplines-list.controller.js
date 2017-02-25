@@ -6,8 +6,8 @@
     function DisciplinesListController(DisciplineService, $state, DialogService){
         var vm = this;
 
-        DisciplineService.all().then(function(disciplines){
-          if(!disciplines.length){
+        DisciplineService.all().then(function(response){
+          if(!response.data.length){
             DialogService.action(
               'В системе не зарегистрированно ни одной дисциплины. Создать новую ?',
                'Перейти к созданию'
@@ -16,7 +16,7 @@
              });
           }
           else {
-            vm.disciplines = disciplines;
+            vm.disciplines = response.data;
           }
 
         });

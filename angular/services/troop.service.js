@@ -1,24 +1,41 @@
 (function(){
     "use strict";
 
-    angular.module('app.services').factory('TroopService', function(API){
-      return new TroopService(API);
+    angular.module('app.services').factory('TroopService', function($http){
+      return new TroopService($http);
     });
 
-    function TroopService(API){
-        var url = 'troops';
-        var all = API.all(url);
+    function TroopService($http){
+        var url = 'http://api.vk-schedule.dev/api/v1/troop/';
+
+        var serialize = function(troop){
+            return {
+                code: troop.code,
+                day: troop.day,
+                term: troop.term,
+                specialty: troop.specialty
+
+            };
+        };
 
         this.all = function(){
-            return all.getList();
+            return $http.get(url);
         };
 
         this.get = function(id){
-            return API.one(url, id).get();
+            return $http.get(url + id + '/');
         };
 
         this.create = function(troop){
-            return all.post(angular.toJson(troop));
+            return $http.post(url, serialize(troop));
+        };
+
+        this.update = function(troop){
+            return $http.put(url + troop.id + '/', serialize(troop));
+        };
+
+        this.delete = function(troop){
+            return $http.delete(url + troop.id + '/');
         };
     }
 

@@ -1,30 +1,45 @@
-(function(){
+(function () {
     "use strict";
 
-    angular.module('app.services').factory('SpecialtyService', function(API, CollectionHelpersService){
-        return new SpecialtyService(API, CollectionHelpersService);
+    angular.module('app.services').factory('SpecialtyService', function ($http) {
+        return new SpecialtyService($http);
     });
 
-    function SpecialtyService(API, CollectionHelpersService){
-      var url = 'specialties';
-      var all = API.all(url);
-
-        this.all = function(){
-            return all.getList();
+    function SpecialtyService($http) {
+        var url = 'http://api.vk-schedule.dev/api/v1/specialty/';
+        var serialize = function (specialty) {
+            return {
+                code: specialty.code
+            }
         };
 
-        this.create = function(specialty){
-          specialty.disciplines = CollectionHelpersService.getIdsFromCollection(specialty.disciplines.data);
-            return all.post(angular.toJson(specialty));
+        this.all = function () {
+            return $http.get(url);
         };
 
-        this.update = function(specialty){
-          specialty.disciplines = CollectionHelpersService.getIdsFromCollection(specialty.disciplines.data);
-          return specialty.save();
+        this.search = function (searchString) {
+            return $http.get(url + '?search=' + searchString)
+                .then(function (response) {
+                    return response.data;
+                });
         };
 
-        this.get = function(id){
-            return API.one(url, id).get();
+        this.get = function (id) {
+            return $http.get(url + id + '/');
+        };
+
+        this.create = function (specialty) {
+            return $http.post(url, serialize(specialty));
+        };
+
+        this.update = function (specialty) {
+            // specialty.disciplines = CollectionHelpersService.getIdsFromCollection(specialty.disciplines.data);
+
+            return $http.put(url + specialty.id + '/', serialize(specialty));
+        };
+
+        this.delete = function(specialty){
+            return $http.delete(url + specialty.id + '/', serialize(specialty));
         };
     }
 

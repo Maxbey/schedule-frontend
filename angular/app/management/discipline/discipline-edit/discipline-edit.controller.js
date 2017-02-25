@@ -6,8 +6,8 @@
     function DisciplineEditController($stateParams, DisciplineService){
         var vm = this;
 
-        DisciplineService.get($stateParams.id).then(function(discipline){
-          vm.discipline = discipline;
+        DisciplineService.get($stateParams.id).then(function(response){
+          vm.discipline = response.data;
         });
     }
 

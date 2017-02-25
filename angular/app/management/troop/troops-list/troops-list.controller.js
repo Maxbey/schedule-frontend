@@ -7,8 +7,8 @@
         var vm = this;
 
         var renderList = function(){
-          TroopService.all().then(function(troops){
-            if(!troops.length){
+          TroopService.all().then(function(response){
+            if(!response.data.length){
               DialogService.action(
                 'В системе не зарегистрированно ни одного взвода. Создать новый ?',
                  'Перейти к созданию'
@@ -17,7 +17,7 @@
                });
             }
             else{
-              vm.troops = troops;
+              vm.troops = response.data;
             }
           });
         };

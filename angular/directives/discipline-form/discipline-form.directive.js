@@ -17,8 +17,8 @@
 
         vm.buttonLocked = false;
 
-        SpecialtyService.all().then(function(specialties){
-          vm.specialties = specialties;
+        SpecialtyService.all().then(function(response){
+          vm.specialties = response.data;
         });
 
         vm.create = function(){
@@ -44,23 +44,18 @@
         vm.delete = function(){
           DialogService.delete('Вы действительно хотите удалить дисциплину ?').then(function(){
             vm.buttonLocked = true;
-            vm.discipline.remove().then(function(){
+            DisciplineService.delete(vm.discipline).then(function(){
               ToastService.show('Дисциплина удалена');
               $state.go('management.disciplines-list');
             });
           });
         };
 
-
-        function createFilterFor(query) {
-          return SelectHelpersService.createFilter(query, 'code', vm.discipline.specialties.data);
-        }
-
         vm.querySearch = function (criteria) {
           if(!criteria)
-            return vm.specialties.filter(SelectHelpersService.notAlreadySelectedFilter(vm.discipline.specialties.data));
+            return SpecialtyService.search('');
 
-          return vm.specialties.filter(createFilterFor(criteria));
+          return SpecialtyService.search(criteria);
         }
     }
 

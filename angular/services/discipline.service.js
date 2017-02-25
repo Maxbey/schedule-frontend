@@ -1,35 +1,49 @@
-(function(){
+(function () {
     "use strict";
 
-    angular.module('app.services').factory('DisciplineService', function(API, CollectionHelpersService){
-      return new DisciplineService(API, CollectionHelpersService);
+    angular.module('app.services').factory('DisciplineService', function ($http) {
+        return new DisciplineService($http);
     });
 
-    function DisciplineService(API, CollectionHelpersService){
-      var url = 'disciplines';
-      var all = API.all(url);
+    function DisciplineService($http) {
+        var url = 'http://api.vk-schedule.dev/api/v1/discipline/';
+        var serialize = function (discipline) {
+            return {
+                full_name: discipline.full_name,
+                short_name: discipline.short_name
+            }
+        };
 
-      this.all = function(){
-          return all.getList();
-      };
+        this.all = function () {
+            return $http.get(url);
+        };
 
-      this.get = function(id){
-          return API.one(url, id).get();
-      };
+        this.search = function (searchString) {
+            return $http.get(url + '?search=' + searchString)
+                .then(function (response) {
+                    return response.data;
+                });
+        };
 
-      this.create = function(discipline){
-        discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
+        this.get = function (id) {
+            return $http.get(url + id + '/');
+        };
 
-          return all.post(angular.toJson(discipline));
-      };
+        this.create = function (discipline) {
+            // discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
 
-      this.update = function(discipline){
-        discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
+            return $http.post(url, serialize(discipline));
+        };
 
-        return discipline.save();
-      };
+        this.update = function (discipline) {
+            // discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
 
+            return $http.put(url + discipline.id + '/', serialize(discipline));
+        };
 
+        this.delete = function (discipline) {
+            return $http.delete(url + discipline.id + '/');
+        };
     }
 
 })();

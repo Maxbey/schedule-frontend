@@ -6,8 +6,8 @@
     function SpecialtiesListController($state, SpecialtyService, DialogService){
         var vm = this;
 
-        SpecialtyService.all().then(function(specialties){
-          if(!specialties.length){
+        SpecialtyService.all().then(function(response){
+          if(!response.data.length){
             DialogService.action(
               'В системе не зарегистрированно ни одной специальности. Создать новую ?',
                'Перейти к созданию'
@@ -16,7 +16,7 @@
              });
           }
           else {
-            vm.specialties = specialties;
+            vm.specialties = response.data;
           }
         });
 

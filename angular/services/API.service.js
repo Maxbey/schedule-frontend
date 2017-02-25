@@ -11,7 +11,7 @@
 
 		return Restangular.withConfig(function(RestangularConfigurer) {
 			RestangularConfigurer
-				.setBaseUrl('http://api.vk-schedule.dev/api/v1/')
+				.setBaseUrl('http://api.vk-schedule.dev/api/v1')
 				.setDefaultHeaders(headers)
 				.addResponseInterceptor(function(data) {
 					if(angular.isString(data))
@@ -30,13 +30,6 @@
 						for (var error in response.data.errors) {
 							return ToastService.error(response.data.errors[error][0]);
 						}
-					}
-				})
-				.addFullRequestInterceptor(function(element, operation, what, url, headers) {
-					var token = locker.get('token');
-
-					if (token) {
-						headers.Authorization = 'Bearer ' + token;
 					}
 				});
 		});
