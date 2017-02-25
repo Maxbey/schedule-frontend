@@ -1,25 +1,39 @@
-(function(){
+(function () {
     "use strict";
 
-    angular.module('app.services').factory('TeacherService', function(API){
-      return new TeacherService(API);
+    angular.module('app.services').factory('TeacherService', function ($http) {
+        return new TeacherService($http);
     });
 
-    function TeacherService(API){
-      var url = 'teachers';
-      var all = API.all(url);
+    function TeacherService($http) {
+        var url = 'http://api.vk-schedule.dev/api/v1/teacher/';
+        var serialize = function (teacher) {
+            return {
+                name: teacher.name,
+                military_rank: teacher.military_rank,
+                work_hours_limit: teacher.work_hours_limit
+            };
+        };
 
-      this.all = function(){
-          return all.getList();
-      };
+        this.all = function () {
+            return $http.get(url);
+        };
 
-      this.get = function(id){
-          return API.one(url, id).get();
-      };
+        this.get = function (id) {
+            return $http.get(url + id + '/');
+        };
 
-      this.create = function(teacher){
-          return all.post(angular.toJson(teacher));
-      };
+        this.create = function (teacher) {
+            return $http.post(url, serialize(teacher));
+        };
+
+        this.update = function (teacher) {
+            return $http.put(url + teacher.id + '/', serialize(teacher));
+        };
+
+        this.delete = function (teacher) {
+            return $http.delete(url + teacher.id + '/');
+        };
     }
 
 })();

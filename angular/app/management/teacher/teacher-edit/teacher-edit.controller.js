@@ -6,8 +6,8 @@
     function TeacherEditController($stateParams, TeacherService){
         var vm = this;
 
-        TeacherService.get($stateParams.id).then(function(teacher){
-          vm.teacher = teacher;
+        TeacherService.get($stateParams.id).then(function(response){
+          vm.teacher = response.data;
         });
     }
 

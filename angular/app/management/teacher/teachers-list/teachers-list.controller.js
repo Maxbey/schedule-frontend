@@ -6,8 +6,8 @@
     function TeachersListController($state, TeacherService, DialogService){
         var vm = this;
 
-        TeacherService.all().then(function(teachers){
-          if(!teachers.length){
+        TeacherService.all().then(function(response){
+          if(!response.data.length){
             DialogService.action(
               'В системе не зарегистрированно ни одного преподавателя. Создать нового ?',
                'Перейти к созданию'
@@ -16,7 +16,7 @@
              });
           }
           else{
-            vm.teachers = teachers;
+            vm.teachers = response.data;
           }
         });
 

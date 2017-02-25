@@ -37,8 +37,6 @@
         };
 
         this.update = function (specialty) {
-            // specialty.disciplines = CollectionHelpersService.getIdsFromCollection(specialty.disciplines.data);
-
             return $http.put(url + specialty.id + '/', serialize(specialty));
         };
 
