@@ -1,16 +1,19 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('DisciplineService', function ($http) {
-        return new DisciplineService($http);
+    angular.module('app.services').factory('DisciplineService', function ($http, CollectionHelpersService) {
+        return new DisciplineService($http, CollectionHelpersService);
     });
 
-    function DisciplineService($http) {
+    function DisciplineService($http, CollectionHelpersService) {
         var url = 'http://api.vk-schedule.dev/api/v1/discipline/';
         var serialize = function (discipline) {
+            var specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties);
+
             return {
                 full_name: discipline.full_name,
-                short_name: discipline.short_name
+                short_name: discipline.short_name,
+                specialties: specialties
             }
         };
 
@@ -30,14 +33,10 @@
         };
 
         this.create = function (discipline) {
-            // discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
-
             return $http.post(url, serialize(discipline));
         };
 
         this.update = function (discipline) {
-            // discipline.specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties.data);
-
             return $http.put(url + discipline.id + '/', serialize(discipline));
         };
 

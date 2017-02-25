@@ -3,16 +3,20 @@
 
     angular.module('app.controllers').controller('SpecialtyFormController', SpecialtyFormController);
 
-    function SpecialtyFormController($scope, $state, DisciplineService, DialogService, SelectHelpersService, ToastService, SpecialtyService) {
+    function SpecialtyFormController($scope, $state, DisciplineService, DialogService, CollectionHelpersService, ToastService, SpecialtyService) {
         var vm = this;
 
         vm.specialty = $scope.specialty;
         if (!vm.specialty) {
             vm.specialty = {
-                disciplines: {
-                    data: []
-                }
+                disciplines: []
             };
+        }
+        else {
+            DisciplineService.all().then(function(response){
+                vm.specialty.disciplines = CollectionHelpersService
+                    .getCollectionByIds(vm.specialty.disciplines, response.data);
+            });
         }
 
         vm.buttonLocked = false;

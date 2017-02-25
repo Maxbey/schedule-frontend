@@ -1,15 +1,19 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('SpecialtyService', function ($http) {
-        return new SpecialtyService($http);
+    angular.module('app.services').factory('SpecialtyService', function ($http, CollectionHelpersService) {
+        return new SpecialtyService($http, CollectionHelpersService);
     });
 
-    function SpecialtyService($http) {
+    function SpecialtyService($http, CollectionHelpersService) {
         var url = 'http://api.vk-schedule.dev/api/v1/specialty/';
         var serialize = function (specialty) {
+            var disciplines = CollectionHelpersService
+                .getIdsFromCollection(specialty.disciplines);
+
             return {
-                code: specialty.code
+                code: specialty.code,
+                disciplines: disciplines
             }
         };
 
@@ -38,7 +42,7 @@
             return $http.put(url + specialty.id + '/', serialize(specialty));
         };
 
-        this.delete = function(specialty){
+        this.delete = function (specialty) {
             return $http.delete(url + specialty.id + '/', serialize(specialty));
         };
     }

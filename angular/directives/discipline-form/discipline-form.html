@@ -21,7 +21,7 @@
   <md-subheader>Ассоциировать со специальностями</md-subheader>
   <md-input-container class="md-block" flex-gt-sm>
     <label>Выберите специальности</label>
-    <md-chips ng-model="vm.discipline.specialties.data" md-autocomplete-snap md-require-match="true">
+    <md-chips ng-model="vm.discipline.specialties" md-autocomplete-snap md-require-match="true">
         <md-autocomplete
                          md-search-text="vm.query"
                          md-items="specialty in vm.querySearch(vm.query)"

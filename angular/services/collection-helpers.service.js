@@ -1,31 +1,42 @@
-(function(){
+(function () {
     "use strict";
 
-    angular.module('app.services').factory('CollectionHelpersService', function(){
-      return new CollectionHelpersService();
+    angular.module('app.services').factory('CollectionHelpersService', function () {
+        return new CollectionHelpersService();
     });
 
-    function CollectionHelpersService(){
-      this.getIdsFromCollection = function(collection){
-        var ids = [];
+    function CollectionHelpersService() {
+        this.getIdsFromCollection = function (collection) {
+            var ids = [];
 
-        angular.forEach(collection, function(item){
-          ids.push(item.id);
-        });
+            angular.forEach(collection, function (item) {
+                ids.push(item.id);
+            });
 
-        return ids;
-      };
+            return ids;
+        };
 
-      this.exists = function(collection, id){
-        var exists = false;
+        this.getCollectionByIds = function (ids, all) {
+            var collection = [];
 
-        angular.forEach(collection, function(item){
-          if(item.id === id)
-            exists = true;
-        });
+            angular.forEach(all, function (item) {
+                if (ids.indexOf(item.id) !== -1)
+                    collection.push(item);
+            });
 
-        return exists;
-      };
+            return collection;
+        };
+
+        this.exists = function (collection, id) {
+            var exists = false;
+
+            angular.forEach(collection, function (item) {
+                if (item.id === id)
+                    exists = true;
+            });
+
+            return exists;
+        };
     }
 
 })();

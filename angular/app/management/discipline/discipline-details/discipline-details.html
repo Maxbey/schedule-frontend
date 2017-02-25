@@ -17,10 +17,10 @@
       <p class="md-body-1">Полное название дисциплины: {{ vm.discipline.full_name }}</p>
       <p class="md-body-1">Аббревиатура: {{ vm.discipline.short_name }}</p>
 
-      <div ng-if="vm.discipline.specialties.data.length !== 0">
+      <div ng-if="vm.discipline.specialties.length !== 0">
         <md-subheader>Дисциплина ассоциирована со специальностями</md-subheader>
         <md-chips>
-            <md-chip ng-repeat="specialty in vm.discipline.specialties.data">{{ specialty.code }}</md-chip>
+            <md-chip ng-repeat="specialty in vm.discipline.specialties">{{ specialty.code }}</md-chip>
         </md-chips>
       </div>
     </div>

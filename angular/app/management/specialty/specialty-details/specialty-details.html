@@ -20,10 +20,10 @@
             <md-chip ng-repeat="troop in vm.specialty.troops">{{ troop.code }}</md-chip>
         </md-chips>
 
-        <div ng-if="vm.specialty.disciplines.data.length !== 0">
+        <div ng-if="vm.specialty.disciplines.length !== 0">
             <md-subheader>Дисцилины, прикрепленные к данной специальности</md-subheader>
             <md-chips>
-                <md-chip ng-repeat="discipline in vm.specialty.disciplines.data">{{ discipline.short_name }}</md-chip>
+                <md-chip ng-repeat="discipline in vm.specialty.disciplines">{{ discipline.short_name }}</md-chip>
             </md-chips>
         </div>
 
