@@ -12,7 +12,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Воинское звание</label>
         <md-select required name="teacherRank" ng-model="vm.teacher.military_rank">
-            <md-option ng-repeat="rank in vm.ranks">
+            <md-option ng-repeat="rank in vm.ranks" ng-value="rank">
                 {{ rank }}
             </md-option>
         </md-select>
