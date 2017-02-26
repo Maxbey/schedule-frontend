@@ -1,125 +1,117 @@
-(function(){
+(function () {
     "use strict";
 
     angular.module('app.controllers').controller('ThemeFromController', ThemeFromController);
 
-    function ThemeFromController($scope, $state, $stateParams, SelectHelpersService, TeacherService, AudienceService, ThemeService, ToastService, DialogService){
+    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, ToastService, DialogService) {
         var vm = this;
 
         vm.theme = $scope.theme;
-        if(!vm.theme){
-          vm.theme = ThemeService.getEmptyInstance();
+        if (!vm.theme) {
+            vm.theme = ThemeService.getEmptyInstance();
         }
+        else {
+            TeacherService.all().then(function (response) {
+                vm.theme.teachers = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.teachers, response.data);
+            });
+            AudienceService.all().then(function (response) {
+                vm.theme.audiences = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.audiences, response.data);
+            });
+            ThemeService.all().then(function (response) {
+                vm.theme.previous_themes = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.previous_themes, response.data);
 
-        vm.theme.discipline_id = $stateParams.id;
-        $scope.prevThemes = vm.theme.prevThemes.data;
+                $scope.previous_themes = vm.theme.previous_themes;
+            });
+        }
+        vm.theme.discipline = $stateParams.id;
 
         vm.buttonLocked = false;
 
-        TeacherService.all().then(function(teachers){
-          vm.teachers = teachers;
-        });
+        vm.teachersSearch = function (criteria) {
+            if (!criteria)
+                return TeacherService.search('');
 
-        AudienceService.all().then(function(audiences){
-          vm.audiences = audiences;
-        });
-
-        vm.teachersSearch = function(criteria){
-          if(!criteria)
-            return vm.teachers.filter(SelectHelpersService.notAlreadySelectedFilter(vm.theme.teachers.data));
-          return teachersQuerySearch(criteria);
+            return TeacherService.search(criteria);
         };
 
-        vm.audiencesSearch = function(criteria){
-          if(!criteria)
-            return vm.audiences.filter(SelectHelpersService.notAlreadySelectedFilter(vm.theme.audiences.data));
-          return audiencesQuerySearch(criteria);
+        vm.audiencesSearch = function (criteria) {
+            if (!criteria)
+                return AudienceService.search('');
+
+            return AudienceService.search(criteria);
         };
 
-        function createFilterForTeachers(query){
-          SelectHelpersService.createFilter(query, 'name', vm.theme.teachers.data);
+        function checkTeachersAdequacy() {
+            return vm.theme.teachers_count <= vm.theme.teachers.length;
         }
 
-        function createFilterForAudiences(query){
-          SelectHelpersService.createFilter(query, 'location', vm.theme.audiences.data);
+        function checkAudiencesAdequacy() {
+            return vm.theme.audiences_count <= vm.theme.audiences.length;
         }
 
-        function audiencesQuerySearch(criteria){
-          return SelectHelpersService.querySearch(vm.audiences, createFilterForAudiences, criteria);
+        function showNotEnoughTeachersAlert() {
+            DialogService.alert('Ошибка!', 'Для занятия по теме требуется больше преподавателей, чем было прикреплено');
         }
 
-        function teachersQuerySearch(criteria){
-          return SelectHelpersService.querySearch(vm.teachers, createFilterForTeachers, criteria);
+        function showNotEnoughAudiencesAlert() {
+            DialogService.alert('Ошибка!', 'Для занятия по теме требуется больше аудиторий, чем было прикреплено');
         }
 
-        function checkTeachersAdequacy(){
-          return vm.theme.teachers_count <= vm.theme.teachers.data.length;
-        }
+        vm.create = function () {
+            if (!checkTeachersAdequacy()) {
+                showNotEnoughTeachersAlert();
+                return;
+            }
 
-        function checkAudiencesAdequacy(){
-          return vm.theme.audiences_count <= vm.theme.audiences.data.length;
-        }
+            if (!checkAudiencesAdequacy()) {
+                showNotEnoughAudiencesAlert();
+                return;
+            }
 
-        function showNotEnoughTeachersAlert(){
-          DialogService.alert('Ошибка!', 'Для занятия по теме требуется больше преподавателей, чем было прикреплено');
-        }
-
-        function showNotEnoughAudiencesAlert(){
-          DialogService.alert('Ошибка!', 'Для занятия по теме требуется больше аудиторий, чем было прикреплено');
-        }
-
-        vm.create = function(){
-          if(!checkTeachersAdequacy()){
-            showNotEnoughTeachersAlert();
-            return;
-          }
-
-          if(!checkAudiencesAdequacy()){
-            showNotEnoughAudiencesAlert();
-            return;
-          }
-
-          vm.buttonLocked = true;
-          ThemeService.create(vm.theme).then(function(){
-            ToastService.show('Тема создана');
-            $state.go('management.themes-list', {id: $stateParams.id});
-          }, function(){
-            vm.buttonLocked = false;
-          });
-        };
-
-        vm.update = function(){
-          if(!checkTeachersAdequacy()){
-            showNotEnoughTeachersAlert();
-            return;
-          }
-
-          if(!checkAudiencesAdequacy()){
-            showNotEnoughAudiencesAlert();
-            return;
-          }
-
-          vm.buttonLocked = true;
-          ThemeService.update(vm.theme).then(function(){
-            ToastService.show('Тема обновлена');
-            $state.go('management.themes-list', {id: $stateParams.id});
-          }, function(){
-            vm.buttonLocked = false;
-          });
-        };
-
-        vm.delete = function(){
-          DialogService.delete('Вы действительно хотите удалить тему ?').then(function(){
             vm.buttonLocked = true;
-            vm.theme.remove().then(function(){
-              ToastService.show('Тема удалена');
-              $state.go('management.themes-list', {id: $stateParams.id});
+            ThemeService.create(vm.theme).then(function () {
+                ToastService.show('Тема создана');
+                $state.go('management.themes-list', {id: $stateParams.id});
+            }, function () {
+                vm.buttonLocked = false;
             });
-          });
         };
 
-        vm.getSetPrevThemesModal = function(){
-          DialogService.fromTemplate('set-prev-themes', $scope);
+        vm.update = function () {
+            if (!checkTeachersAdequacy()) {
+                showNotEnoughTeachersAlert();
+                return;
+            }
+
+            if (!checkAudiencesAdequacy()) {
+                showNotEnoughAudiencesAlert();
+                return;
+            }
+
+            vm.buttonLocked = true;
+            ThemeService.update(vm.theme).then(function () {
+                ToastService.show('Тема обновлена');
+                $state.go('management.themes-list', {id: $stateParams.id});
+            }, function () {
+                vm.buttonLocked = false;
+            });
+        };
+
+        vm.delete = function () {
+            DialogService.delete('Вы действительно хотите удалить тему ?').then(function () {
+                vm.buttonLocked = true;
+                ThemeService.delete(vm.theme).then(function () {
+                    ToastService.show('Тема удалена');
+                    $state.go('management.themes-list', {id: $stateParams.id});
+                });
+            });
+        };
+
+        vm.getSetPrevThemesModal = function () {
+            DialogService.fromTemplate('set-prev-themes', $scope);
         };
     }
 

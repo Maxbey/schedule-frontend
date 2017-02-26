@@ -6,7 +6,7 @@
           Назад
         </md-button>
         <h2>
-          <span>Просмотр темы № {{ vm.theme.number }} учебной дисциплины {{ vm.theme.discipline }}</span>
+          <span>Просмотр темы № {{ vm.theme.number }} учебной дисциплины {{ vm.theme.discipline_name }}</span>
         </h2>
         <span flex></span>
       </div>
@@ -19,24 +19,24 @@
       <p class="md-body-1">Необходимое количество преподавателей: {{ vm.theme.teachers_count }}</p>
       <p class="md-body-1">Необходимое количество аудиторий: {{ vm.theme.audiences_count }}</p>
 
-      <div ng-if="vm.theme.teachers.data.length !== 0">
+      <div ng-if="vm.theme.teachers.length !== 0">
         <md-subheader>Прикрепленные преподаватели</md-subheader>
         <md-chips>
-            <md-chip ng-repeat="teacher in vm.theme.teachers.data">{{ teacher.name }}</md-chip>
+            <md-chip ng-repeat="teacher in vm.theme.teachers">{{ teacher.name }}</md-chip>
         </md-chips>
       </div>
 
-      <div ng-if="vm.theme.audiences.data.length !== 0">
+      <div ng-if="vm.theme.audiences.length !== 0">
         <md-subheader>Прикрепленные аудитории</md-subheader>
         <md-chips>
-            <md-chip ng-repeat="audience in vm.theme.audiences.data">{{ audience.location }}</md-chip>
+            <md-chip ng-repeat="audience in vm.theme.audiences">{{ audience.location }}</md-chip>
         </md-chips>
       </div>
 
-      <div ng-if="vm.theme.prevThemes.data.length !== 0">
+      <div ng-if="vm.theme.previous_themes.length !== 0">
         <md-subheader>Обязательные предшествующие темы</md-subheader>
         <md-chips>
-            <md-chip ng-repeat="theme in vm.theme.prevThemes.data">{{ theme.discipline }} : №{{ theme.number }}</md-chip>
+            <md-chip ng-repeat="theme in vm.theme.previous_themes">{{ theme.discipline_name }} : №{{ theme.number }}</md-chip>
         </md-chips>
       </div>
 

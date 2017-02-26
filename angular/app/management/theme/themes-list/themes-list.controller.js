@@ -28,10 +28,10 @@
           });
         };
 
-        DisciplineService.get($stateParams.id).then(function(discipline){
-          vm.discipline = discipline;
+        DisciplineService.get($stateParams.id).then(function(response){
+          vm.discipline = response.data;
 
-          if(!discipline.themes.data.length){
+          if(!vm.discipline.themes.length){
             DialogService.action(
               'Данная дисциплина не имеет тем. Создать новую ?',
                'Перейти к созданию'

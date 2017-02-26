@@ -19,6 +19,13 @@
             return $http.get(url);
         };
 
+        this.search = function (searchString) {
+            return $http.get(url + '?search=' + searchString)
+                .then(function (response) {
+                    return response.data;
+                });
+        };
+
         this.get = function (id) {
             return $http.get(url + id + '/');
         };

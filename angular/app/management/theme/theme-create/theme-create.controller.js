@@ -3,11 +3,11 @@
 
     angular.module('app.controllers').controller('ThemeCreateController', ThemeCreateController);
 
-    function ThemeCreateController($scope, $state, $stateParams, DisciplineService){
+    function ThemeCreateController($state, $stateParams, DisciplineService){
       var vm = this;
 
-      DisciplineService.get($stateParams.id).then(function(discipline){
-        vm.discipline = discipline;
+      DisciplineService.get($stateParams.id).then(function(response){
+        vm.discipline = response.data;
       });
 
       vm.goBack = function(){

@@ -18,7 +18,7 @@
 
      <md-input-container class="md-block" flex-gt-sm>
        <label>Выберите предшествующие темы</label>
-       <md-chips ng-model="vm.prevThemes" md-autocomplete-snap md-require-match="true">
+       <md-chips ng-model="vm.previous_themes" md-autocomplete-snap md-require-match="true">
            <md-autocomplete
                             ng-disabled="vm.loading"
                             md-search-text="vm.themeQuery"
@@ -30,7 +30,7 @@
                <span md-highlight-text="vm.themeQuery">№{{ theme.number }} {{ theme.name }}</span>
            </md-autocomplete>
            <md-chip-template>
-               <span>{{ $chip.discipline }} : №{{ $chip.number }}</span>
+               <span>{{ $chip.discipline_name }} : №{{ $chip.number }}</span>
            </md-chip-template>
        </md-chips>
      </md-input-container>

@@ -3,15 +3,15 @@
 
     angular.module('app.controllers').controller('ThemeEditController', ThemeEditController);
 
-    function ThemeEditController($scope, $state, $stateParams, ThemeService, DisciplineService){
+    function ThemeEditController($state, $stateParams, ThemeService, DisciplineService){
         var vm = this;
 
-        DisciplineService.get($stateParams.id).then(function(discipline){
-          vm.discipline = discipline;
+        DisciplineService.get($stateParams.id).then(function(response){
+          vm.discipline = response.data;
         });
 
-        ThemeService.get($stateParams.themeId).then(function(theme){
-          vm.theme = theme;
+        ThemeService.get($stateParams.themeId).then(function(response){
+          vm.theme = response.data;
         });
 
         vm.goBack = function(){
