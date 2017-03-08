@@ -6,7 +6,7 @@
     });
 
     function AudienceService($http) {
-        var url = 'http://api.vk-schedule.dev/api/v1/audience/';
+        var url = 'http://localhost/api/v1/audience/';
         var serialize = function (audience) {
             return {
                 description: audience.description,

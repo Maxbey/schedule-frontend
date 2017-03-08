@@ -3,6 +3,11 @@
   "devDependencies": {
     "gulp": "^3.8.8"
   },
+  "scripts": {
+    "install": "bower install",
+    "build": "gulp",
+    "serve": "gulp serve"
+  },
   "dependencies": {
     "eslint": "^1.10.3",
     "eslint-plugin-angular": "^0.15.0",

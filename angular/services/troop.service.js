@@ -6,7 +6,7 @@
     });
 
     function TroopService($http){
-        var url = 'http://api.vk-schedule.dev/api/v1/troop/';
+        var url = 'http://localhost/api/v1/troop/';
 
         var serialize = function(troop){
             return {

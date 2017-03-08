@@ -42,6 +42,7 @@ elixir(function(mix) {
 gulp.task('serve', function() {
     connect.server({
         root: 'public',
-        fallback: 'public/index.html'
+        fallback: 'public/index.html',
+		port: 9000
     });
 });
