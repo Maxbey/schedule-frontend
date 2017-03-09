@@ -6,7 +6,7 @@
     });
 
     function TeacherService($http) {
-        var url = 'http://vk-schedule.omgtu.ru/api/v1/teacher/';
+        var url = 'https://vk-schedule.omgtu.ru/api/v1/teacher/';
         var serialize = function (teacher) {
             return {
                 name: teacher.name,
