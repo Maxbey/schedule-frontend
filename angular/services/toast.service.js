@@ -4,7 +4,7 @@
 	angular.module("app.services").factory('ToastService', function($mdToast){
 
 		var delay = 3000,
-			position = 'top right',
+			position = 'bottom right',
 			action = 'OK';
 
 		return {
