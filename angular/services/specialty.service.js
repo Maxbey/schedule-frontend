@@ -6,7 +6,7 @@
     });
 
     function SpecialtyService($http, CollectionHelpersService) {
-        var url = 'http://localhost/api/v1/specialty/';
+        var url = 'http://vk-schedule.omgtu.ru/api/v1/specialty/';
         var serialize = function (specialty) {
             var disciplines = CollectionHelpersService
                 .getIdsFromCollection(specialty.disciplines);

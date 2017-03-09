@@ -3,7 +3,7 @@
 
     angular.module('app.controllers').controller('LoginController', LoginController);
 
-    function LoginController(AuthService, $auth, $state, ToastService) {
+    function LoginController($auth, $state, ToastService) {
         var vm = this;
 
         vm.login = function (email, password) {
@@ -14,7 +14,6 @@
             };
 
             $auth.login(credentials).then(function (response) {
-                console.log(response);
                 $auth.setToken(response.data.key);
                 $state.go('management.specialties-list');
             }, function () {

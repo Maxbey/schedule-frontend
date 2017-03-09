@@ -15,9 +15,9 @@
     angular.module('app.routes', []);
     angular.module('app.controllers', [
         'ui.router', 'ngMaterial', 'ngStorage',
-        'restangular', 'angular-loading-bar',
+        'angular-loading-bar',
         'ngMessages', 'materialCalendar',
-        'angular-locker', 'validation.match',
+        'validation.match',
         'satellizer', 'chart.js'
     ]);
     angular.module('app.filters', []);
