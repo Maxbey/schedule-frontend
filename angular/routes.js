@@ -20,7 +20,10 @@
 						templateUrl: getView('header')
 					},
 					main: {}
-				}
+				},
+                data: {
+                    auth: true
+                }
 			})
 			.state('management.specialties-list', {
 				url: '/specialties/',
@@ -194,13 +197,13 @@
 			$stateProvider
 				.state('auth', {
 					abstract: true,
-					main: {}
+					main: {},
+                    data: {
+                        auth: false
+                    }
 				})
 			.state('auth.login', {
 				url: '/login/',
-				data: {
-					noLogin: true
-				},
 				views: {
 					'main@': {
 						templateUrl: getView('login')

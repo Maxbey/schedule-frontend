@@ -11,7 +11,6 @@
         };
 
         this.responseError = function(response) {
-            console.log('asdsadas');
             if (response.status === 401) {
                 var $auth = $injector.get('$auth');
                 var $state = $injector.get('$state');
