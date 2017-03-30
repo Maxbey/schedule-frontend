@@ -192,7 +192,31 @@
 						templateUrl: getView('management.theme.theme-details')
 					}
 				}
-			});
+			})
+            .state('management.theme-type-list', {
+                url: '/theme-types/',
+                views: {
+                    'main@': {
+                        templateUrl: getView('management.theme-type.theme-type-list')
+                    }
+                }
+            })
+            .state('management.theme-type-create', {
+                url: '/theme-types/create/',
+                views: {
+                    'main@': {
+                        templateUrl: getView('management.theme-type.theme-type-create')
+                    }
+                }
+            })
+            .state('management.theme-type-edit', {
+                url: '/theme-types/{id}/edit/',
+                views: {
+                    'main@': {
+                        templateUrl: getView('management.theme-type.theme-type-edit')
+                    }
+                }
+            });
 
 			$stateProvider
 				.state('auth', {

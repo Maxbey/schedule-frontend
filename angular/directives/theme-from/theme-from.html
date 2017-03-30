@@ -48,6 +48,20 @@
     </div>
   </md-input-container>
 
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Вид занятия</label>
+    <md-select name="themeType" ng-model="vm.theme.type">
+      <md-option ng-repeat="type in vm.themeTypes" value="{{type.id}}">
+        {{type.name}}
+      </md-option>
+    </md-select>
+    <div ng-messages="themeForm.themeType.$error" role="alert">
+      <div ng-message-exp="['required']">
+        Должен быть указан вид занятия
+      </div>
+    </div>
+  </md-input-container>
+
   <md-input-container class="md-block" flex-gt-sm layout-padding>
     <md-checkbox ng-model="vm.theme.self_education" name="selfStudy" aria-label="self study checkbox">
       Тема для самоподготовки?

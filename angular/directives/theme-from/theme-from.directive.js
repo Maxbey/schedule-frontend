@@ -3,7 +3,7 @@
 
     angular.module('app.controllers').controller('ThemeFromController', ThemeFromController);
 
-    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, ToastService, DialogService) {
+    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, ThemeTypeService, ToastService, DialogService) {
         var vm = this;
 
         vm.theme = $scope.theme;
@@ -29,6 +29,10 @@
         vm.theme.discipline = $stateParams.id;
 
         vm.buttonLocked = false;
+
+        ThemeTypeService.all().then(function(response){
+            vm.themeTypes = response.data;
+        });
 
         vm.teachersSearch = function (criteria) {
             if (!criteria)

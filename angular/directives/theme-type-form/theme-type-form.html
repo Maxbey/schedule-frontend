@@ -1,0 +1,32 @@
+<div>
+    <md-subheader>Основная информация</md-subheader>
+    <form name="themeTypeForm">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Наименование вида</label>
+            <input name="typeName" required ng-model="vm.themeType.name">
+            <div ng-messages="themeTypeForm.typeName.$error" role="alert">
+                <div ng-message-exp="['required']">
+                    Укажите наименование вида занятия
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Сокращенное наименование вида</label>
+            <input name="typeShort" required ng-model="vm.themeType.short_name">
+            <div ng-messages="themeTypeForm.typeShort.$error" role="alert">
+                <div ng-message-exp="['required']">
+                    Укажите сокращенное наименование вида занятия
+                </div>
+            </div>
+        </md-input-container>
+
+            <div ng-if="!type">
+                <md-button ng-disabled="vm.buttonLocked || themeTypeForm.$invalid" class="md-raised" ng-click="vm.create()">Создать вид</md-button>
+            </div>
+            <div ng-if="type">
+                <md-button ng-disabled="vm.buttonLocked || themeTypeForm.$invalid" class="md-raised" ng-click="vm.update()">Обновить вид</md-button>
+                <md-button ng-disabled="vm.buttonLocked" class="md-raised md-warn" ng-click="vm.delete()">Удалить вид</md-button>
+            </div>
+
+    </form>
+</div>

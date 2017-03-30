@@ -19,6 +19,7 @@
                 self_education: theme.self_education,
                 duration: theme.duration,
                 discipline: theme.discipline,
+                type: theme.type,
                 audiences_count: theme.audiences_count,
                 teachers_count: theme.teachers_count,
                 teachers: teachers,

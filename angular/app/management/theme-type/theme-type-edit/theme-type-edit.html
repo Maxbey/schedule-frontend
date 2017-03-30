@@ -1,0 +1,15 @@
+<md-content class="Page-Container" ng-controller="ThemeTypeEditController as vm">
+    <h1 class="md-title" layout-padding>Администрирование видов занятий</h1>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button ui-sref="management.theme-type-list" aria-label="back">
+                Назад
+            </md-button>
+            <h2>
+                <span>Редактирование вида занятия</span>
+            </h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <theme-type-form ng-if="vm.themeType" type="vm.themeType"></theme-type-form>
+</md-content>
