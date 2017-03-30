@@ -25,6 +25,14 @@
                     auth: true
                 }
 			})
+			.state('management.dashboard', {
+				url: '/',
+				views: {
+					'main@': {
+						templateUrl: getView('management.management-dash')
+					}
+				}
+			})
 			.state('management.specialties-list', {
 				url: '/specialties/',
 				views: {

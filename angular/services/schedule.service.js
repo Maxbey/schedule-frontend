@@ -6,8 +6,8 @@
     });
 
     function ScheduleService($http){
-        var schedule_url = 'http://api.vk-schedule.dev/api/v1/schedule/';
-        var export_url = 'http://api.vk-schedule.dev/api/v1/export/excel/';
+        var schedule_url = 'https://vk-schedule.omgtu.ru/api/v1/schedule/';
+        var export_url = 'https://vk-schedule.omgtu.ru/api/v1/export/excel/';
 
         this.getStatus = function(id){
             return $http.get(schedule_url);

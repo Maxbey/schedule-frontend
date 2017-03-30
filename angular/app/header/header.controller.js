@@ -14,6 +14,9 @@
             {text: 'Преподаватели', state: 'management.teachers-list'},
             {text: 'Аудитории', state: 'management.audiences-list'}
         ];
+        vm.dashboardsMenuItems = [
+            {text: 'Панель администратора', state: 'management.dashboard'},
+        ];
 
         vm.go = function (item) {
             $state.go(item.state);

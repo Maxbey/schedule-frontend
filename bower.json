@@ -24,6 +24,10 @@
     "angular-validation-match": "~1.7.1",
     "angular-chart.js": "~0.10.2",
     "angular-file-saver": "~1.1.1",
-    "satellizer": "^0.15.5"
+    "satellizer": "^0.15.5",
+    "blob": "*",
+    "file-saver": "^1.3.3",
+    "moment": "^2.18.1",
+    "js-xlsx": "^0.9.7"
   }
 }

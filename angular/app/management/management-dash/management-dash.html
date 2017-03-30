@@ -1,5 +1,6 @@
 <md-content class="Page-Container" ng-controller="ManagementDashController as vm">
-    <h1 class="md-title" layout-padding>Статистика нагрузки</h1>
+  
+    <!--<h1 class="md-title" layout-padding>Статистика нагрузки</h1>
     <md-subheader>Временной диапазон</md-subheader>
     <md-datepicker ng-model="vm.from" md-placeholder="Начиная с"></md-datepicker>
     <md-datepicker ng-model="vm.to" md-placeholder="По"></md-datepicker>
@@ -18,39 +19,27 @@
         chart-data="vm.relatively.data" chart-labels="vm.relatively.labels">
       </canvas>
     </div>
-  </div>
+  </div>-->
 
   <div layout="column" flex="40" layout-padding>
-    <h1 class="md-title" layout-padding>Экспорт расписания в Excell</h1>
-
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Для взводов</label>
-      <md-chips ng-model="vm.troopsForExport" md-autocomplete-snap md-require-match="true">
-          <md-autocomplete
-                           md-search-text="vm.troopQuery"
-                           md-items="troop in vm.troopsSearch(vm.troopQuery)"
-                           md-item-text="troop.code"
-                           md-min-length="0"
-                           md-no-cache="true"
-                           md-require-match="true">
-              <span md-highlight-text="vm.troopQuery">{{ troop.code }}</span>
-          </md-autocomplete>
-          <md-chip-template>
-              <span>{{ $chip.code}}</span>
-          </md-chip-template>
-      </md-chips>
-    </md-input-container>
+    <h1 class="md-title" layout-padding>Работа с расписанием</h1>
+    <md-subheader>Составление расписания</md-subheader>
+    <form ng-if="!vm.progress" name="scheduleForm">
+      <md-datepicker ng-model="vm.scheduleParams.start_date" md-placeholder="Начало семестра"></md-datepicker>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Количество недель</label>
+        <input name="term_length" required ng-model="vm.scheduleParams.term_length">
+      </md-input-container>
+      <div layout="row">
+        <md-button class="md-raised md-warn" ng-click="vm.buildSchedule()">Составить</md-button>
+      </div>
+    </form>
+    <md-progress-linear ng-if="vm.progress" md-mode="determinate" value="{{ vm.progress * 100 }}"></md-progress-linear>
+    <md-subheader>Экспорт расписания</md-subheader>
     <div layout="row">
-      <md-button class="md-raised" ng-click="vm.export()">Экспорт</md-button>
-    </div>
-
-
-  </div>
-
-  <div layout="column" flex="40" layout-padding>
-    <h1 class="md-title" layout-padding>Генерация расписания</h1>
-    <div layout="row">
-      <md-button class="md-raised md-warn" ng-click="vm.generate()">Запуск</md-button>
+      <md-progress-linear ng-if="vm.exporting" md-mode="indeterminate"></md-progress-linear>
+      <md-button ng-if="!vm.exporting" class="md-raised md-primary" ng-click="vm.localExport()">Экспортировать</md-button>
+      <md-button ng-if="vm.scheduleExportLink" class="md-raised md-warn" ng-href="{{ vm.scheduleExportLink }}" download="xlsx">Скачать</md-button>
     </div>
   </div>
 
