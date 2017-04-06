@@ -224,7 +224,31 @@
                         templateUrl: getView('management.theme-type.theme-type-edit')
                     }
                 }
-            });
+            })
+			.state('management.teachers-statistic', {
+				url: '/teachers-statistic/',
+				views: {
+					'main@': {
+						templateUrl: getView('management.teacher.teacher-statistic')
+					}
+				}
+			})
+			.state('management.troops-statistic-list', {
+				url: '/troops-statistic/',
+				views: {
+					'main@': {
+						templateUrl: getView('management.troop.troop-statistic-list')
+					}
+				}
+			})
+			.state('management.troop-chart', {
+				url: '/troop/{id}/chart/',
+				views: {
+					'main@': {
+						templateUrl: getView('management.troop.troop-chart')
+					}
+				}
+			});
 
 			$stateProvider
 				.state('auth', {
