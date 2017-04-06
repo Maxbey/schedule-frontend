@@ -1,0 +1,30 @@
+<md-content class="Page-Container" ng-controller="TroopChartController as vm">
+  <h1 class="md-title" layout-padding>Администрирование учебных взводов</h1>
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button ui-sref="management.troops-statistic-list" aria-label="back">
+          Назад
+        </md-button>
+        <h2>
+          <span>Статистика {{ vm.troop.code }} взвода</span>
+        </h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <div class="content">
+        <div class="content__troop-chart">
+            <h2 class='md-title'>Общий прогресс</h2>
+            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
+        </div>
+        <div class="content__troop-disciplines">
+            <md-list>
+                <div class="md-list-item" ng-repeat="discipline in vm.troop.statistics.by_disciplines" ng-click="null">
+                    <div class="md-list-item-text">
+                        <p>{{ discipline.name }}</p>
+                        <div><md-progress-linear md-mode="determinate" value="{{discipline.progress * 100}}"></md-progress-linear></div>
+                    </div>
+                </div>
+            </md-list>
+        </div>
+    </div>
+</md-content>

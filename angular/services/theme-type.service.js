@@ -6,7 +6,7 @@
     });
 
     function ThemeTypeService($http) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/theme_type/';
+        var url = 'http://api.vk-schedule.dev/api/v1/theme_type/';
 
         var serialize = function (theme_type) {
             return {

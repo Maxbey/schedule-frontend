@@ -37,5 +37,13 @@
 				<h4 class="md-subhead">{{ item.text }}</h4>
 			</md-list-item>
 		</md-list>
+
+		<md-subheader>Статистика</md-subheader>
+		<md-divider></md-divider>
+		<md-list>
+			<md-list-item class="secondary-button-padding" ng-repeat="item in vm.statisticMenuItems" ng-click="vm.toggle();vm.go(item)">
+				<h4 class="md-subhead">{{ item.text }}</h4>
+			</md-list-item>
+		</md-list>
 	</md-sidenav>
 </div>

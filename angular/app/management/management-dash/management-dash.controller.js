@@ -82,6 +82,38 @@
         //       vm.relatively.data[0].push(teacher.relatively);
         //     });
 
+        // API для графиков производительности
+        // [
+        //   {name: 'Глебов',
+        //     absolute: 16,
+        //     relatively: 0.4
+        //   },
+        //   {}
+        // ]
+
+        //API для получения освоения дисциплины взвода
+        // {
+        //   code: 331,
+        //   disciplinsRate: [
+        //     {
+        //       name: 'УПМВ',
+        //       ratio: 0,4 //на сколько освоена дисциплина
+        //     },
+        //     {}
+        //   ]
+        // }
+        //
+        // [
+        //   {
+        //     code: 331,
+        //     ratio: 0,6
+        //   },
+        //   {
+        //     code: 232,
+        //     ratio: 0,4
+        //   }
+        // ]
+
         //     $timeout(function() {
         //       $scope.$apply();
         //     });
@@ -102,7 +134,7 @@
         // };
 
         vm.localExport = function(){
-          $window.open('https://vk-schedule.omgtu.ru/api/v1/export/excel/');
+          $window.open('http://api.vk-schedule.dev/api/v1/export/excel/');
         };
 
         vm.buildSchedule = function(){
