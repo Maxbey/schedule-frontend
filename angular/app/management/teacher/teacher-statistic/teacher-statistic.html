@@ -1,13 +1,24 @@
 <div ng-controller="TeachersStatisticController as vm">
-    <div>Статистика загруженности преподавателей</div>
 
-    <h1>Относительная</h1>
-    <canvas id="bar" class="chart chart-bar"
-        chart-data="vm.chart.relativeData" chart-labels="vm.chart.labels" chart-series="vm.series">
-    </canvas>
+    <h1 class="md-title" layout-padding>Статистика нагрузки</h1>
+    <md-subheader>Временной диапазон</md-subheader>
+    <md-datepicker ng-model="vm.from" md-placeholder="Начиная с"></md-datepicker>
+    <md-datepicker ng-model="vm.to" md-placeholder="По"></md-datepicker>
+    <md-button class="md-raised" ng-disabled="vm.loading" ng-click="vm.loadCharts(vm.from, vm.to)">Загрузить данные</md-button>
 
-    <h1>Абсолютная</h1>
-    <canvas id="bar" class="chart chart-bar"
-        chart-data="vm.chart.absoluteData" chart-labels="vm.chart.labels" chart-series="vm.series">
-    </canvas>
+    <div class="charts" ng-if="vm.chartsIsLoaded">
+        <div class="chart-block">
+            <h2 class='md-title'> Относительная</h2>
+            <canvas id="bar" class="chart chart-bar"
+                chart-data="vm.chart.relativeData" chart-labels="vm.chart.labels" chart-series="vm.series">
+            </canvas>
+        </div>
+
+        <div class="chart-block">
+            <h2 class='md-title'>Абсолютная</h2>
+            <canvas id="bar" class="chart chart-bar"
+                chart-data="vm.chart.absoluteData" chart-labels="vm.chart.labels" chart-series="vm.series">
+            </canvas>
+        </div>
+    </div>
 </div>
