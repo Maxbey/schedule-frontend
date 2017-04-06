@@ -224,7 +224,15 @@
                         templateUrl: getView('management.theme-type.theme-type-edit')
                     }
                 }
-            });
+            })
+			.state('management.teachers-statistic', {
+				url: '/teachers-statistic/',
+				views: {
+					'main@': {
+						templateUrl: getView('management.teacher.teacher-statistic')
+					}
+				}
+			});
 
 			$stateProvider
 				.state('auth', {

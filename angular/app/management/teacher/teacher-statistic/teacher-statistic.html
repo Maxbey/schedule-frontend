@@ -1,0 +1,13 @@
+<div ng-controller="TeachersStatisticController as vm">
+    <div>Статистика загруженности преподавателей</div>
+
+    <h1>Относительная</h1>
+    <canvas id="bar" class="chart chart-bar"
+        chart-data="vm.chart.relativeData" chart-labels="vm.chart.labels" chart-series="vm.series">
+    </canvas>
+
+    <h1>Абсолютная</h1>
+    <canvas id="bar" class="chart chart-bar"
+        chart-data="vm.chart.absoluteData" chart-labels="vm.chart.labels" chart-series="vm.series">
+    </canvas>
+</div>
