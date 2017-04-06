@@ -6,7 +6,7 @@
     });
 
     function TroopService($http){
-        var url = 'http://api.vk-schedule.dev/api/v1/troop/';
+        var url = 'https://vk-schedule.omgtu.ru/api/v1/troop/';
 
         var serialize = function(troop){
             return {

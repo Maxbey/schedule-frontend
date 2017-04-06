@@ -6,7 +6,7 @@
     });
 
     function DisciplineService($http, CollectionHelpersService) {
-        var url = 'http://api.vk-schedule.dev/api/v1/discipline/';
+        var url = 'https://vk-schedule.omgtu.ru/api/v1/discipline/';
         var serialize = function (discipline) {
             var specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties);
 

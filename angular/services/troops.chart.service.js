@@ -6,7 +6,7 @@
     });
 
     function TroopsChartsService($http) {
-        var url = 'http://api.vk-schedule.dev/api/v1/statistics/troop/';
+        var url = 'https://vk-schedule.omgtu.ru/api/v1/statistics/troop/';
 
         this.all = function (id) {
             return $http.get(url + id + '/');

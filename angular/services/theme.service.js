@@ -6,7 +6,7 @@
     });
 
     function ThemeService($http, CollectionHelpersService) {
-        var url = 'http://api.vk-schedule.dev/api/v1/theme/';
+        var url = 'https://vk-schedule.omgtu.ru/api/v1/theme/';
         var serialize = function (theme) {
             var teachers = CollectionHelpersService.getIdsFromCollection(theme.teachers);
             var audiences = CollectionHelpersService.getIdsFromCollection(theme.audiences);

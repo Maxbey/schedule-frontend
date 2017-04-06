@@ -134,7 +134,7 @@
         // };
 
         vm.localExport = function(){
-          $window.open('http://api.vk-schedule.dev/api/v1/export/excel/');
+          $window.open('https://vk-schedule.omgtu.ru/api/v1/export/excel/');
         };
 
         vm.buildSchedule = function(){
