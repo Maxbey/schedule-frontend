@@ -3,26 +3,10 @@
 
     angular.module('app.controllers').controller('TeachersStatisticController', TeachersStatisticController);
 
-    function TeachersStatisticController($state){
+    function TeachersStatisticController($state, $scope, TeacherChartsService, $timeout){
         var vm = this;
-        vm.teacherStatistic = [
-            {
-                name: 'Глебов',
-                statistics: {
-                    absolute: 163,
-                    relative: 0.3
-                }
-            },
-            {
-                name: 'Пепеляев',
-                statistics: {
-                    absolute: 123,
-                    relative: 0.6
-                }
-            }
-        ];
-
-        vm.chart = convertData(vm.teacherStatistic);
+        vm.teacherStatistic = [];
+        vm.chartsIsLoaded = false;
 
         function convertData(data) {
             var resultObject = {
@@ -45,6 +29,17 @@
 
             return resultObject;
         }
-    }
 
+        vm.loadCharts = function(dateFrom, dateTo) {
+            vm.chartsIsLoaded = false;
+            var formatedDateFrom = moment(dateFrom).format('YYYY-MM-DD');
+            var formatedDateTo = moment(dateTo).format('YYYY-MM-DD');
+
+            TeacherChartsService.all(formatedDateFrom, formatedDateTo)
+                .then(function(response){
+                    vm.chart = convertData(response.data);
+                    vm.chartsIsLoaded = true;
+                });
+        }
+    }
 })();
