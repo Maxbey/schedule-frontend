@@ -16,7 +16,8 @@
         ];
         vm.dashboardsMenuItems = [
             {text: 'Панель администратора', state: 'management.dashboard'},
-            {text: 'Статистика нагрузки преподавателей', state: 'management.teachers-statistic'}
+            {text: 'Статистика нагрузки преподавателей', state: 'management.teachers-statistic'},
+            {text: 'Статистика изучения программы взводами', state: 'management.troops-statistic-list'}
         ];
 
         vm.go = function (item) {
