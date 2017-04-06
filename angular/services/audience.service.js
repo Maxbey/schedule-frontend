@@ -6,7 +6,7 @@
     });
 
     function AudienceService($http) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/audience/';
+        var url = 'http://api.vk-schedule.devapi/v1/audience/';
         var serialize = function (audience) {
             return {
                 description: audience.description,
