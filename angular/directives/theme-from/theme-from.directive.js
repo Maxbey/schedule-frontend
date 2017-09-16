@@ -3,7 +3,7 @@
 
     angular.module('app.controllers').controller('ThemeFromController', ThemeFromController);
 
-    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, ThemeTypeService, ToastService, DialogService) {
+    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, SpecialtyService, ThemeTypeService, ToastService, DialogService) {
         var vm = this;
 
         vm.theme = $scope.theme;
@@ -12,12 +12,18 @@
         }
         else {
             TeacherService.all().then(function (response) {
-                vm.theme.teachers = CollectionHelpersService
-                    .getCollectionByIds(vm.theme.teachers, response.data);
+                vm.theme.teachers_main = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.teachers_main, response.data);
+                vm.theme.teachers_alternative = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.teachers_alternative, response.data);
             });
             AudienceService.all().then(function (response) {
                 vm.theme.audiences = CollectionHelpersService
                     .getCollectionByIds(vm.theme.audiences, response.data);
+            });
+            SpecialtyService.all().then(function (response) {
+                vm.theme.specialties = CollectionHelpersService
+                    .getCollectionByIds(vm.theme.specialties, response.data);
             });
             ThemeService.all().then(function (response) {
                 vm.theme.previous_themes = CollectionHelpersService
@@ -41,6 +47,13 @@
             return TeacherService.search(criteria);
         };
 
+        vm.specialtiesSearch = function (criteria) {
+            if (!criteria)
+                return SpecialtyService.search('');
+
+            return SpecialtyService.search(criteria);
+        };
+
         vm.audiencesSearch = function (criteria) {
             if (!criteria)
                 return AudienceService.search('');
@@ -49,7 +62,7 @@
         };
 
         function checkTeachersAdequacy() {
-            return vm.theme.teachers_count <= vm.theme.teachers.length;
+            return vm.theme.teachers_count <= (vm.theme.teachers_main.length + vm.theme.teachers_alternative.length);
         }
 
         function checkAudiencesAdequacy() {

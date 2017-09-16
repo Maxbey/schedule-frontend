@@ -35,6 +35,25 @@
   </md-input-container>
 
   <md-input-container class="md-block" flex-gt-sm>
+    <label>Прикрепить специальности</label>
+    <md-chips ng-model="vm.theme.specialties" md-autocomplete-snap md-require-match="true">
+        <md-autocomplete
+                         md-search-text="vm.query"
+                         md-items="specialty in vm.specialtiesSearch(vm.query)"
+                         md-item-text="name"
+                         md-min-length="0"
+                         md-no-cache="true"
+                         md-require-match="true"
+                         placeholder="Выберите специальности">
+            <span md-highlight-text="vm.query">{{ specialty.code }}</span>
+        </md-autocomplete>
+        <md-chip-template>
+            <span>{{$chip.code}}</span>
+        </md-chip-template>
+    </md-chips>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
     <label>Продолжительность занятия в академ. часах</label>
     <md-select required name="themeDuration" ng-model="vm.theme.duration">
             <md-option ng-repeat="duration in [1, 2, 4, 6]" ng-value="duration">
@@ -97,8 +116,27 @@
   </md-input-container>
 
   <md-input-container class="md-block" flex-gt-sm>
-    <label>Прикрепить преподавателей</label>
-    <md-chips ng-model="vm.theme.teachers" md-autocomplete-snap md-require-match="true">
+    <label>Прикрепить основных преподавателей</label>
+    <md-chips ng-model="vm.theme.teachers_main" md-autocomplete-snap md-require-match="true">
+        <md-autocomplete
+                         md-search-text="vm.query"
+                         md-items="teacher in vm.teachersSearch(vm.query)"
+                         md-item-text="name"
+                         md-min-length="0"
+                         md-no-cache="true"
+                         md-require-match="true"
+                         placeholder="Выберите преподавателей">
+            <span md-highlight-text="vm.query">{{ teacher.name }}</span>
+        </md-autocomplete>
+        <md-chip-template>
+            <span>{{$chip.name}}</span>
+        </md-chip-template>
+    </md-chips>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Прикрепить замещающих преподавателей</label>
+    <md-chips ng-model="vm.theme.teachers_alternative" md-autocomplete-snap md-require-match="true">
         <md-autocomplete
                          md-search-text="vm.query"
                          md-items="teacher in vm.teachersSearch(vm.query)"
