@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('ThemeService', function ($http, CollectionHelpersService) {
-        return new ThemeService($http, CollectionHelpersService);
+    angular.module('app.services').factory('ThemeService', function ($http, CollectionHelpersService, envConfig) {
+        return new ThemeService($http, CollectionHelpersService, envConfig);
     });
 
-    function ThemeService($http, CollectionHelpersService) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/theme/';
+    function ThemeService($http, CollectionHelpersService, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/theme/';
         var serialize = function (theme) {
             var teachers_main = CollectionHelpersService.getIdsFromCollection(theme.teachers_main);
             var teachers_alternative = CollectionHelpersService.getIdsFromCollection(theme.teachers_alternative);

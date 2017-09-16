@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('ThemeTypeService', function ($http) {
-        return new ThemeTypeService($http);
+    angular.module('app.services').factory('ThemeTypeService', function ($http, envConfig) {
+        return new ThemeTypeService($http, envConfig);
     });
 
-    function ThemeTypeService($http) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/theme_type/';
+    function ThemeTypeService($http, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/theme_type/';
 
         var serialize = function (theme_type) {
             return {

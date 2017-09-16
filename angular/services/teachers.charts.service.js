@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('TeacherChartsService', function ($http) {
-        return new TeacherChartsService($http);
+    angular.module('app.services').factory('TeacherChartsService', function ($http, envConfig) {
+        return new TeacherChartsService($http, envConfig);
     });
 
-    function TeacherChartsService($http) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/statistics/teachers_load/';
+    function TeacherChartsService($http, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/statistics/teachers_load/';
 
         this.all = function (dateFrom, dateTo) {
             return $http.get(

@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('AudienceService', function ($http) {
-        return new AudienceService($http);
+    angular.module('app.services').factory('AudienceService', function ($http, envConfig) {
+        return new AudienceService($http, envConfig);
     });
 
-    function AudienceService($http) {
-        var url = 'http://api.vk-schedule.devapi/v1/audience/';
+    function AudienceService($http, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/audience/';
         var serialize = function (audience) {
             return {
                 description: audience.description,

@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('SpecialtyService', function ($http) {
-        return new SpecialtyService($http);
+    angular.module('app.services').factory('SpecialtyService', function ($http, envConfig) {
+        return new SpecialtyService($http, envConfig);
     });
 
-    function SpecialtyService($http) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/specialty/';
+    function SpecialtyService($http, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/specialty/';
         var serialize = function (specialty) {
 
             return {
