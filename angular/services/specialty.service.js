@@ -1,19 +1,16 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('SpecialtyService', function ($http, CollectionHelpersService) {
-        return new SpecialtyService($http, CollectionHelpersService);
+    angular.module('app.services').factory('SpecialtyService', function ($http) {
+        return new SpecialtyService($http);
     });
 
-    function SpecialtyService($http, CollectionHelpersService) {
+    function SpecialtyService($http) {
         var url = 'https://vk-schedule.omgtu.ru/api/v1/specialty/';
         var serialize = function (specialty) {
-            var disciplines = CollectionHelpersService
-                .getIdsFromCollection(specialty.disciplines);
 
             return {
-                code: specialty.code,
-                disciplines: disciplines
+                code: specialty.code
             }
         };
 

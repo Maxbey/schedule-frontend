@@ -38,7 +38,7 @@
               console.log('One time');
               vm.interval = $interval(function() {
                 getScheduleStatus();
-              }, 500);
+              }, 10000);
             }
             else {
               vm.progress = false;
