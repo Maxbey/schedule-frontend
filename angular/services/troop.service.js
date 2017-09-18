@@ -5,7 +5,7 @@
       return new TroopService($http, envConfig);
     });
 
-    function TroopService($http){
+    function TroopService($http, envConfig){
         var url = envConfig.API_HOST + '/api/v1/troop/';
 
         var serialize = function(troop){

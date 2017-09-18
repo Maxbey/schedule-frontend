@@ -1,7 +1,7 @@
 angular.module("ngConstants", [])
 
 .constant("envConfig", {
-	"API_HOST": "api.vk-schedule.dev"
+	"API_HOST": "http://api.vk-schedule.dev"
 })
 
 ;

@@ -18,7 +18,7 @@
                 name: theme.name,
                 number: theme.number,
                 term: theme.term,
-                self_education: theme.self_education,
+                self_education_hours: theme.self_education_hours,
                 duration: theme.duration,
                 discipline: theme.discipline,
                 type: theme.type,
@@ -55,7 +55,7 @@
 
         this.getEmptyInstance = function () {
             return {
-                self_education: false,
+                self_education_hours: 0,
                 audiences: [],
                 teachers_main: [],
                 teachers_alternative: [],

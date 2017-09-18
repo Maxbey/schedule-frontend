@@ -6,7 +6,7 @@
     });
 
     function DisciplineService($http, envConfig) {
-        var url = envConfig + '/api/v1/discipline/';
+        var url = envConfig.API_HOST + '/api/v1/discipline/';
         var serialize = function (discipline) {
             return {
                 full_name: discipline.full_name,
