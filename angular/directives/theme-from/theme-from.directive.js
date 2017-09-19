@@ -3,7 +3,7 @@
 
     angular.module('app.controllers').controller('ThemeFromController', ThemeFromController);
 
-    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, TeacherService, AudienceService, ThemeService, SpecialtyService, ThemeTypeService, ToastService, DialogService) {
+    function ThemeFromController($scope, $state, $stateParams, CollectionHelpersService, SelectHelpersService, TeacherService, AudienceService, ThemeService, SpecialtyService, ThemeTypeService, ToastService, DialogService) {
         var vm = this;
 
         vm.theme = $scope.theme;
@@ -42,9 +42,13 @@
 
         vm.teachersSearch = function (criteria) {
             if (!criteria)
-                return TeacherService.search('');
+                return TeacherService.search('').then(function(teachers){
+                    return filterSelectedTeachers(teachers);
+                });
 
-            return TeacherService.search(criteria);
+            return TeacherService.search(criteria).then(function(teachers){
+                return filterSelectedTeachers(teachers);
+            });
         };
 
         vm.specialtiesSearch = function (criteria) {
@@ -60,6 +64,14 @@
 
             return AudienceService.search(criteria);
         };
+
+        function filterSelectedTeachers(teachers) {
+            var filter = SelectHelpersService.notAlreadySelectedFilter(
+                vm.theme.teachers_main.concat(vm.theme.teachers_alternative)
+            );
+
+            return teachers.filter(filter);
+        }
 
         function checkTeachersAdequacy() {
             return vm.theme.teachers_count <= (vm.theme.teachers_main.length + vm.theme.teachers_alternative.length);

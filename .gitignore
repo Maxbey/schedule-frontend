@@ -8,3 +8,4 @@ public/views
 public/css
 public/js
 yarn.lock
+ngConstants.js
