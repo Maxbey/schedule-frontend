@@ -1,13 +1,13 @@
 (function(){
     "use strict";
 
-    angular.module('app.services').factory('ScheduleService', function($http){
-      return new ScheduleService($http);
+    angular.module('app.services').factory('ScheduleService', function($http, envConfig){
+      return new ScheduleService($http, envConfig);
     });
 
-    function ScheduleService($http){
-        var schedule_url = 'https://vk-schedule.omgtu.ru/api/v1/schedule/';
-        var export_url = 'https://vk-schedule.omgtu.ru/api/v1/export/excel/';
+    function ScheduleService($http, envConfig){
+        var schedule_url = envConfig.API_HOST + '/api/v1/schedule/';
+        var export_url = envConfig.API_HOST + '/api/v1/export/excel/';
 
         this.getStatus = function(id){
             return $http.get(schedule_url);

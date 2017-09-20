@@ -1,14 +1,16 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('ThemeService', function ($http, CollectionHelpersService) {
-        return new ThemeService($http, CollectionHelpersService);
+    angular.module('app.services').factory('ThemeService', function ($http, CollectionHelpersService, envConfig) {
+        return new ThemeService($http, CollectionHelpersService, envConfig);
     });
 
-    function ThemeService($http, CollectionHelpersService) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/theme/';
+    function ThemeService($http, CollectionHelpersService, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/theme/';
         var serialize = function (theme) {
-            var teachers = CollectionHelpersService.getIdsFromCollection(theme.teachers);
+            var teachers_main = CollectionHelpersService.getIdsFromCollection(theme.teachers_main);
+            var teachers_alternative = CollectionHelpersService.getIdsFromCollection(theme.teachers_alternative);
+            var specialties = CollectionHelpersService.getIdsFromCollection(theme.specialties);
             var audiences = CollectionHelpersService.getIdsFromCollection(theme.audiences);
             var previous_themes = CollectionHelpersService.getIdsFromCollection(theme.previous_themes);
 
@@ -16,15 +18,17 @@
                 name: theme.name,
                 number: theme.number,
                 term: theme.term,
-                self_education: theme.self_education,
+                self_education_hours: theme.self_education_hours,
                 duration: theme.duration,
                 discipline: theme.discipline,
                 type: theme.type,
                 audiences_count: theme.audiences_count,
                 teachers_count: theme.teachers_count,
-                teachers: teachers,
+                teachers_main: teachers_main,
+                teachers_alternative: teachers_alternative,
                 audiences: audiences,
-                previous_themes: previous_themes
+                previous_themes: previous_themes,
+                specialties: specialties
             };
         };
 
@@ -51,9 +55,11 @@
 
         this.getEmptyInstance = function () {
             return {
-                self_education: false,
+                self_education_hours: 0,
                 audiences: [],
-                teachers: [],
+                teachers_main: [],
+                teachers_alternative: [],
+                specialties: [],
                 previous_themes: []
             };
         };

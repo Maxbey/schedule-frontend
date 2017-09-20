@@ -9,6 +9,8 @@ var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var notify = require('gulp-notify');
 var gulpif = require('gulp-if');
+var gulpNgConstant = require('gulp-ng-constant');
+var process = require('process');
 
 var Elixir = require('laravel-elixir');
 
@@ -16,11 +18,22 @@ var Task = Elixir.Task;
 
 Elixir.extend('angular', function(src, output, outputFilename) {
 
+	var apiConfig = {
+		envConfig: {
+			API_HOST: process.env.API_HOST,
+		}
+	};
+
 	var baseDir = src || Elixir.config.assetsPath + '/angular/';
+
+	gulpNgConstant({
+			constants: apiConfig,
+			stream: true
+		}).pipe(gulp.dest(baseDir));
 
 	new Task('angular in ' + baseDir, function() {
 		// Main file has to be included first.
-		return gulp.src([baseDir + "main.js", baseDir + "**/*.js"])
+		return gulp.src([baseDir + "main.js", baseDir + "ngConstants.js", baseDir + "**/*.js"])
 			.pipe(eslint())
 			.pipe(eslint.format())
 			.pipe(gulpif(! config.production, sourcemaps.init()))

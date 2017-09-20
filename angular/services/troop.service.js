@@ -1,12 +1,12 @@
 (function(){
     "use strict";
 
-    angular.module('app.services').factory('TroopService', function($http){
-      return new TroopService($http);
+    angular.module('app.services').factory('TroopService', function($http, envConfig){
+      return new TroopService($http, envConfig);
     });
 
-    function TroopService($http){
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/troop/';
+    function TroopService($http, envConfig){
+        var url = envConfig.API_HOST + '/api/v1/troop/';
 
         var serialize = function(troop){
             return {

@@ -3,27 +3,14 @@
 
     angular.module('app.controllers').controller('DisciplineFormController', DisciplineFormController);
 
-    function DisciplineFormController($scope, $state, SpecialtyService, DisciplineService, CollectionHelpersService, ToastService, DialogService) {
+    function DisciplineFormController($scope, $state, DisciplineService, ToastService, DialogService) {
         var vm = this;
 
         vm.discipline = $scope.discipline;
-        if (!vm.discipline) {
-            vm.discipline = {
-                specialties: []
-            };
-        }
-        else {
-            SpecialtyService.all().then(function (response) {
-                vm.discipline.specialties = CollectionHelpersService
-                    .getCollectionByIds(vm.discipline.specialties, response.data);
-            });
-        }
+        if (!vm.discipline)
+            vm.discipline = {};
 
         vm.buttonLocked = false;
-
-        SpecialtyService.all().then(function (response) {
-            vm.specialties = response.data;
-        });
 
         vm.create = function () {
             vm.buttonLocked = true;
@@ -54,13 +41,6 @@
                 });
             });
         };
-
-        vm.querySearch = function (criteria) {
-            if (!criteria)
-                return SpecialtyService.search('');
-
-            return SpecialtyService.search(criteria);
-        }
     }
 
 })();

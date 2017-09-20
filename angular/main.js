@@ -3,6 +3,7 @@
 
     var app = angular.module('app',
         [
+            'ngConstants',
             'app.controllers',
             'app.filters',
             'app.services',

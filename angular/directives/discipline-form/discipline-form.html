@@ -18,24 +18,6 @@
       </div>
     </div>
   </md-input-container>
-  <md-input-container class="md-block" flex-gt-sm>
-    <label>Прикрепить к специальностям</label>
-    <md-chips ng-model="vm.discipline.specialties" md-autocomplete-snap md-require-match="true">
-        <md-autocomplete
-                         md-search-text="vm.query"
-                         md-items="specialty in vm.querySearch(vm.query)"
-                         md-item-text="code"
-                         md-min-length="0"
-                         md-no-cache="true"
-                         md-require-match="true"
-                         placeholder="Выберите специальности">
-            <span md-highlight-text="vm.query">{{ specialty.code }}</span>
-        </md-autocomplete>
-        <md-chip-template>
-            <span>{{$chip.code}}</span>
-        </md-chip-template>
-    </md-chips>
-  </md-input-container>
 
   <div ng-if="!discipline">
     <md-button ng-disabled="vm.buttonLocked || disciplineForm.$invalid" class="md-raised" ng-click="vm.create()">Создать дисциплину</md-button>

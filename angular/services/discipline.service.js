@@ -1,19 +1,16 @@
 (function () {
     "use strict";
 
-    angular.module('app.services').factory('DisciplineService', function ($http, CollectionHelpersService) {
-        return new DisciplineService($http, CollectionHelpersService);
+    angular.module('app.services').factory('DisciplineService', function ($http, envConfig) {
+        return new DisciplineService($http, envConfig);
     });
 
-    function DisciplineService($http, CollectionHelpersService) {
-        var url = 'https://vk-schedule.omgtu.ru/api/v1/discipline/';
+    function DisciplineService($http, envConfig) {
+        var url = envConfig.API_HOST + '/api/v1/discipline/';
         var serialize = function (discipline) {
-            var specialties = CollectionHelpersService.getIdsFromCollection(discipline.specialties);
-
             return {
                 full_name: discipline.full_name,
-                short_name: discipline.short_name,
-                specialties: specialties
+                short_name: discipline.short_name
             }
         };
 
