@@ -29,6 +29,10 @@
             return $http.get(url + id + '/');
         };
 
+        this.getCourseLength = function(id){
+            return $http.get(url + id + '/course_length/');
+        };
+
         this.create = function (specialty) {
             return $http.post(url, serialize(specialty));
         };

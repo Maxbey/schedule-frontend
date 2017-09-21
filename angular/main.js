@@ -19,7 +19,8 @@
         'angular-loading-bar',
         'ngMessages', 'materialCalendar',
         'validation.match',
-        'satellizer', 'chart.js'
+        'satellizer', 'chart.js',
+        'md.data.table'
     ]);
     angular.module('app.filters', []);
     angular.module('app.services', []);
