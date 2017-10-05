@@ -3,7 +3,7 @@
 
     angular.module('app.controllers').controller('ManagementDashController', ManagementDashController);
 
-    function ManagementDashController($scope, $window, $interval, $timeout, ToastService, ScheduleService){
+    function ManagementDashController($scope, $window, $interval, $timeout, ToastService, ScheduleService, envConfig){
         var vm = this;
 
         vm.chartsReady = false;
@@ -38,7 +38,7 @@
               console.log('One time');
               vm.interval = $interval(function() {
                 getScheduleStatus();
-              }, 10000);
+              }, 3000);
             }
             else {
               vm.progress = false;
@@ -48,93 +48,8 @@
 
         getBuildProgress();
 
-        // var loadCharts = function(dateFrom, dateTo){
-        //   vm.loading = true;
-
-        //   API.all('schedule/teachers-stat').getList({
-        //     from: dateFrom,
-        //     to: dateTo
-        //   }).then(function(stat){
-        //     if(angular.isDefined(vm.absolute))
-        //     {
-        //       delete vm.absolute.data;
-        //       delete vm.absolute.labels;
-        //     }
-
-        //     vm.absolute = {
-        //       data: [],
-        //       labels: []
-        //     };
-
-        //     vm.relatively = {
-        //       data: [],
-        //       labels: []
-        //     };
-
-        //     vm.absolute.data.push([]);
-        //     vm.relatively.data.push([]);
-
-        //     angular.forEach(stat, function(teacher){
-        //       vm.absolute.labels.push(teacher.name);
-        //       vm.relatively.labels.push(teacher.name);
-
-        //       vm.absolute.data[0].push(teacher.absolute);
-        //       vm.relatively.data[0].push(teacher.relatively);
-        //     });
-
-        // API для графиков производительности
-        // [
-        //   {name: 'Глебов',
-        //     absolute: 16,
-        //     relatively: 0.4
-        //   },
-        //   {}
-        // ]
-
-        //API для получения освоения дисциплины взвода
-        // {
-        //   code: 331,
-        //   disciplinsRate: [
-        //     {
-        //       name: 'УПМВ',
-        //       ratio: 0,4 //на сколько освоена дисциплина
-        //     },
-        //     {}
-        //   ]
-        // }
-        //
-        // [
-        //   {
-        //     code: 331,
-        //     ratio: 0,6
-        //   },
-        //   {
-        //     code: 232,
-        //     ratio: 0,4
-        //   }
-        // ]
-
-        //     $timeout(function() {
-        //       $scope.$apply();
-        //     });
-
-        //     vm.chartsReady = true;
-        //     vm.loading = false;
-        //   });
-        // };
-
-        // vm.loadCharts = function(){
-        //   if(angular.isDefined(vm.from) && angular.isDefined(vm.to))
-        //     loadCharts(vm.from.toISOString().split('T')[0], vm.to.toISOString().split('T')[0]);
-        //   else {
-        //     {
-        //       ToastService.show("Укажите временной диапазон");
-        //     }
-        //   }
-        // };
-
         vm.localExport = function(){
-          $window.open('https://vk-schedule.omgtu.ru/api/v1/export/excel/');
+          $window.open(envConfig.API_HOST + '/api/v1/export/excel/');
         };
 
         vm.buildSchedule = function(){

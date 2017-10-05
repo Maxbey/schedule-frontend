@@ -40,13 +40,15 @@
                            <th md-column><span>3 Семестр</span></th>
                            <th md-column><span>4 Семестр</span></th>
                            <th md-column><span>5 Семестр</span></th>
+                           <th md-column><span>6 Семестр</span></th>
+                           <th md-column><span>7 Семестр</span></th>
                        </tr>
                        </thead>
                        <tbody md-body>
                        <tr md-row
                            ng-repeat="discipline in vm.course_length | limitTo: vm.tableParams.limit: (vm.tableParams.page - 1) * vm.tableParams.limit">
                            <td md-cell>{{ discipline.discipline }}</td>
-                           <td ng-repeat="term in [0, 1, 2, 3, 4]" md-cell>
+                           <td ng-repeat="term in [0, 1, 2, 3, 4, 5, 6]" md-cell>
                              {{ discipline.terms[term].lessons +  discipline.terms[term].self_education}} / {{ discipline.terms[term].lessons }} / {{ discipline.terms[term].self_education }}
                            </td>
                        </tr>
